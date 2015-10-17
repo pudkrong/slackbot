@@ -1,11 +1,6 @@
 Summary
 =======
-A simple code to demonstrate the idea to integrate the power of Elasticsearch into slack
-
-The idea comes from the fact that eko app is quite similar to Slack platform. So, 
-I think it would be better to extend the feature by giving customer to do whatever
-they want via BOT api like Slack does.
-
+A simple code to demonstrate the idea to integrate the power of Elasticsearch into slack and it is fun!!!
 
 Prerequisite
 ============
