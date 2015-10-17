@@ -35,6 +35,8 @@ node index.js
 After you see the message on the console, please go to the channel you have just created earlier and try command
 
 1. siri near 1000km
+![alt tag](https://raw.githubusercontent.com/pudkrong/slackbot/master/data/screenshot/near.png)  
 2. siri search rock
+![alt tag](https://raw.githubusercontent.com/pudkrong/slackbot/master/data/screenshot/search.png)  
 
 
