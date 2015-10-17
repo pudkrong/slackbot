@@ -1,3 +1,5 @@
+"use strict";
+
 var logger = require("winston");
 var Seq = require("seq");
 var esMapping = require("./lib/es/mapping");
