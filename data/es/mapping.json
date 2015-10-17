@@ -1,0 +1,91 @@
+{ 
+  "settings": { 
+    "number_of_replicas": "1",
+    "number_of_shards": "1",
+    "analysis": { 
+        "filter": { 
+            "en_sorting": { 
+              "type": "icu_collation", 
+              "language": "en" 
+            },
+            "index_ngram": { 
+              "type": "edgeNGram", 
+              "min_gram": 1, 
+              "max_gram": 10, 
+              "token_chars": [ 
+                  "letter", 
+                  "digit", 
+                  "punctuation", 
+                  "symbol" 
+              ] 
+            }
+        }, 
+        "analyzer": {
+            "keyword_en_sorting": { 
+               "type": "custom", 
+               "tokenizer": "keyword", 
+               "filter": [ 
+                 "en_sorting" 
+               ] 
+            }, 
+            "icu_folding_ngram": { 
+               "type": "custom", 
+               "tokenizer": "icu_tokenizer", 
+               "filter": [ 
+                 "standard", 
+                 "lowercase", 
+                 "icu_folding", 
+                 "index_ngram" 
+               ] 
+            }, 
+            "standard_folding": { 
+               "type": "custom", 
+               "tokenizer": "standard", 
+               "filter": [ 
+                 "standard", 
+                 "lowercase", 
+                 "icu_folding" 
+               ] 
+            }
+        }
+    } 
+  }, 
+  "mappings": { 
+    "_default_": { 
+        "dynamic_templates": [ 
+          { 
+             "folding_string_fields": { 
+                 "mapping": { 
+                    "index": "analyzed", 
+                    "omit_norms": true, 
+                    "type": "string", 
+                    "fields": { 
+                      "en_sorting": { 
+                        "type": "string",
+                        "index": "analyzed", 
+                        "index_analyzer": "keyword_en_sorting"
+                      },                      
+                      "raw": { 
+                        "type": "string",
+                        "index": "not_analyzed"                        
+                      }
+                    }, 
+                    "index_analyzer": "icu_folding_ngram",
+                    "search_analyzer": "standard_folding"
+                 }, 
+                "match_mapping_type": "string" 
+              }
+           },
+           { 
+             "geo_fields": { 
+                 "mapping": {  
+                    "type": "geo_point"
+                    },
+                    "path_match": "[Ll]ocation",
+                    "match_pattern": "regex"
+                 }
+              }
+          ]
+     } 
+  } 
+} 
